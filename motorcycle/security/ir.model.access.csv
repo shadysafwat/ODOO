@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+motorcycle_user_access,motorcycle_user_access,model_motorcycle,motorcycle.user_motorcycle,1,1,0,0
+motorcycle_manager_access,motorcycle_manager_access,model_motorcycle,motorcycle.manager_motorcycle,1,1,1,1
+motorcycle_mileage_user_access,motorcycle_mileage_user_access,model_motorcycle_mileage,motorcycle.user_motorcycle,1,1,1,1

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Partners Category -->
+        <record id="module_motorcycle_security" model="ir.module.category">
+            <field name="name">Motorcycle</field>
+        </record>
+
+        <!-- Groups -->
+        <record id="user_motorcycle" model="res.groups">
+            <field name="name">User</field>
+            <field name="category_id" ref="module_motorcycle_security"/>
+        </record>
+
+        <record id="manager_motorcycle" model="res.groups">
+            <field name="name">Manager</field>
+            <field name="category_id" ref="module_motorcycle_security"/>
+            <field name="implied_ids" eval="[(4, ref('user_motorcycle'))]"/>
+        </record>
+
+        <!-- Record Rules -->
+        <record model="ir.rule" id="user_motorcycle_rule">
+            <field name="name">View assigned motorcycle only rule</field>
+            <field name="model_id" ref="model_motorcycle"/>
+            <field name="domain_force">[('assigned_to','=',user.id)]</field>
+            <field name="groups" eval="[(4, ref('motorcycle.user_motorcycle'))]"/>
+        </record>
+
+        <record model="ir.rule" id="manager_motorcycle_rule">
+            <field name="name">View all motorcycle</field>
+            <field name="model_id" ref="model_motorcycle"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4, ref('motorcycle.manager_motorcycle'))]"/>
+        </record>
+
+
+    </data>
+</odoo>

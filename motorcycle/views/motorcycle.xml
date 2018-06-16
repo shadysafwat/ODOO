@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id='motorcycle_view_tree' model='ir.ui.view'>
+        <field name="name">motorcycle.tree</field>
+        <field name="model">motorcycle</field>
+        <field name="arch" type="xml">
+            <tree string="Motorcycle" decoration-danger="remaining_days_for_expire &lt; 7">
+                <field name="name"/>
+                <field name="licence_expire_date"/>
+                <field name="assigned_to"/>
+                <field name="remaining_days_for_expire" invisible="True"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id='motorcycle_view_form' model='ir.ui.view'>
+        <field name="name">motorcycle.form</field>
+        <field name="model">motorcycle</field>
+        <field name="arch" type="xml">
+            <form string="Motorcycle">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="assigned_to" groups="motorcycle.manager_motorcycle"/>
+                        </group>
+                        <group>
+                            <field name="licence_expire_date"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Mileage">
+                            <field name="motorcycle_mileage_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="date"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <group>
+                                            <field name="name"/>
+                                        </group>
+                                        <group>
+                                            <field name="date"/>
+                                        </group>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id='motorcycle_action' model='ir.actions.act_window'>
+        <field name="name">Motorcycle</field>
+        <field name="res_model">motorcycle</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="motorcycle_main_menu" name="Motorcycle"/>
+    <menuitem action="motorcycle_action" id="motorcycle_menu" name="Motorcycle"
+              parent="motorcycle_main_menu"/>
+
+</odoo>
